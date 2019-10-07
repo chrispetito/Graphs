@@ -52,7 +52,7 @@ class Graph:
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-            #   Create a stack
+    #   Create a stack
         stack = Stack()
     #   Create list of visited nodes
         visited = set()
@@ -94,14 +94,56 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass  # TODO
+    #   Create a queue
+        queue = Queue()
+    #   Create list of visited nodes
+        visited = set()
+    #   Put starting node in the queue
+        queue.enqueue(starting_vertex)
+    #   While: queue not empty
+        while queue.size() > 0:
+    #   Pop first node out of queue
+            vertex = queue.dequeue()
+    #   If not visited
+            if vertex not in visited:
+                visited.add(vertex)
+                print(vertex)
+    #   Mark as visited
+    #   Get adjacent edges and add to list
+                for next_vert in self.vertices[vertex]:
+                    # path = set(vertex)
+                    # path.add(next_vert)
+                    queue.enqueue(next_vert)
+                    if next_vert == destination_vertex:
+                        return next_vert
+    #   Goto top of loop    
     def dfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing a path from
         starting_vertex to destination_vertex in
         depth-first order.
         """
-        pass  # TODO
+        #   Create a stack
+        stack = Stack()
+    #   Create list of visited nodes
+        visited = set()
+    #   Put starting node in the stack
+        stack.push(starting_vertex)
+    #   While: stack not empty
+        while stack.size() > 0:
+    #   Pop first node out of stack
+            vertex = stack.pop()
+    #   If not visited
+            if vertex not in visited:
+                visited.add(vertex)
+                print(vertex)
+    #   Mark as visited
+    #   Get adjacent edges and add to list
+                for next_vert in self.vertices[vertex]:
+                    stack.push(next_vert)
+                    if next_vert== destination_vertex:
+                        return next_vert
+    #   Goto top of loop 
 
 
 
@@ -176,6 +218,7 @@ if __name__ == '__main__':
     Valid BFS path:
         [1, 2, 4, 6]
     '''
+    print('BFS start')
     print(graph.bfs(1, 6))
 
     '''
@@ -183,4 +226,5 @@ if __name__ == '__main__':
         [1, 2, 4, 6]
         [1, 2, 4, 7, 6]
     '''
+    print('DFS start')
     print(graph.dfs(1, 6))
