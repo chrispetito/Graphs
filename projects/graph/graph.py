@@ -88,6 +88,7 @@ class Graph:
         for vertex in self.vertices[starting_vertex]:
             if vertex not in visited:
                 self.dft_recursive(vertex, visited)
+                
     def bfs(self, starting_vertex, destination_vertex):
         """
         Return a list containing the shortest path from
