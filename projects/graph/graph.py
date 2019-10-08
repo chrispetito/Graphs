@@ -99,23 +99,26 @@ class Graph:
     #   Create list of visited nodes
         visited = set()
     #   Put starting node in the queue
-        queue.enqueue(starting_vertex)
+        queue.enqueue([starting_vertex])
     #   While: queue not empty
         while queue.size() > 0:
     #   Pop first node out of queue
-            vertex = queue.dequeue()
+            path = queue.dequeue()
+            vertex = path[-1]
     #   If not visited
             if vertex not in visited:
+                if vertex == destination_vertex:
+                    return path
                 visited.add(vertex)
-                print(vertex)
+                # print(vertex)
     #   Mark as visited
     #   Get adjacent edges and add to list
                 for next_vert in self.vertices[vertex]:
-                    # path = set(vertex)
-                    # path.add(next_vert)
-                    queue.enqueue(next_vert)
-                    if next_vert == destination_vertex:
-                        return next_vert
+                    new_path = list(path)
+                    new_path.append(next_vert)
+                    queue.enqueue(new_path)
+                    # if next_vert == destination_vertex:
+                    #     return next_vert
     #   Goto top of loop    
     def dfs(self, starting_vertex, destination_vertex):
         """
