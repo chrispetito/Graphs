@@ -1,3 +1,17 @@
+import random
+
+class Queue():
+    def __init__(self):
+        self.queue = []
+    def enqueue(self, value):
+        self.queue.append(value)
+    def dequeue(self):
+        if self.size() > 0:
+            return self.queue.pop(0)
+        else:
+            return None
+    def size(self):
+        return len(self.queue)
 
 
 class User:
@@ -45,6 +59,28 @@ class SocialGraph:
         self.users = {}
         self.friendships = {}
         # !!!! IMPLEMENT ME
+
+        # add users for range of numUsers
+        for i in range(numUsers):
+            self.addUser(i)
+        # create friendships list
+        friendships = []
+        # for every user in users dict...
+        for user in self.users:
+            # and for every friend in range from user to lastID...
+            for friend in range(user, self.lastID):
+                # add user to friendships list
+                friendships.append(( user, friend ))
+            # shuffle friendships
+            random.shuffle(friendships)
+        # for every index in range from 0 to numUsers...
+        for j in range(0, numUsers):
+            # set var to to current friend and add friendship
+            curr_friend = friendships[j]
+            self.addFriendship(curr_friend[0], curr_friend[1])
+                    
+    
+
 
         # Add users
 
